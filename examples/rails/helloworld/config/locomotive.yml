@@ -1,0 +1,6 @@
+---
+mode: development
+port: 3001
+bundle: /Applications/Locomotive2/Bundles/rmagickRailsMar2007_i386.locobundle
+runs_at_launch: 0
+identifier: helloworld
