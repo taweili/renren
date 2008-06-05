@@ -37,14 +37,17 @@ Rails::Initializer.run do |config|
   # Make sure the secret is at least 30 characters and all random, 
   # no regular words or you'll be exposed to dictionary attacks.
   config.action_controller.session = {
-    :session_key => '_helloworld_session',
-    :secret      => '0c473caf4ac243b4e905634e7998be54cea1e49fbeefe1d91b6ebae77f113be08cb8ea0c7bacf21097c110d6172efa9cee80bcfbec723511269f58d095799dae'
+   :session_key => '_helloworld_session',
+   :secret      => '0c473caf4ac243b4e905634e7998be54cea1e49fbeefe1d91b6ebae77f113be08cb8ea0c7bacf21097c110d6172efa9cee80bcfbec723511269f58d095799dae'
   }
 
+  # Disable request forgery protection in test environment
+  config.action_controller.allow_forgery_protection = false
+  
   # Use the database for sessions instead of the cookie-based default,
   # which shouldn't be used to store highly confidential information
   # (create the session table with 'rake db:sessions:create')
-  # config.action_controller.session_store = :active_record_store
+  config.action_controller.session_store = :active_record_store
 
   # Use SQL instead of Active Record's schema dumper when creating the test database.
   # This is necessary if your schema can't be completely dumped by the schema dumper,

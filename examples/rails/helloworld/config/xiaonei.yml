@@ -1,0 +1,10 @@
+development:
+  api_key: 2ab3135dfa0d4c9c8391d23920a2f7ca
+  secret_key: bb11836f50174679a6e934d38de94998
+  canvas_page_name: taweili
+  callback_url: http://www.featha.com:5100/
+  tunnel:
+    public_host_username: 
+    public_host: 
+    public_port: 4007
+    local_port: 3000
