@@ -14,7 +14,11 @@ module Xiaonei
         :session_key => session_key,
         :v => "1.0" }
       xn_params.merge!(params) if params
-      Service.new.post(xn_params)
+      parse(Service.new.post(xn_params).data)
+    end
+    
+    def parse(data)
+      parser = REXML::SAX2Parser.new(data)
     end
   end
 end
