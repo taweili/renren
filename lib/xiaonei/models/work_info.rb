@@ -1,6 +1,10 @@
 module Xiaonei
-  class Error
-    ATTR_SYMS = [:error_code, :error_msg]
+  class WorkInfo
+    ATTR_SYMS = [:company_name, 
+                 :description,
+                 :start_date,
+                 :end_date]
+
     for a in ATTR_SYMS
       attr_accessor a
     end
@@ -9,12 +13,5 @@ module Xiaonei
       ATTR_SYMS.include?(attr.to_sym)
     end
 
-    def code
-      @error_code
-    end
-
-    def msg
-      @error_msg
-    end
   end
 end

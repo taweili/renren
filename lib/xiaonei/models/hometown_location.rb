@@ -1,6 +1,7 @@
 module Xiaonei
-  class Error
-    ATTR_SYMS = [:error_code, :error_msg]
+  class HometownLocation
+    ATTR_SYMS = [ :country, :province, :city ]
+    
     for a in ATTR_SYMS
       attr_accessor a
     end
@@ -9,12 +10,5 @@ module Xiaonei
       ATTR_SYMS.include?(attr.to_sym)
     end
 
-    def code
-      @error_code
-    end
-
-    def msg
-      @error_msg
-    end
   end
 end
