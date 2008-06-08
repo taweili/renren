@@ -14,10 +14,40 @@ describe Xiaonei::Parse do
     end
   end
   
+  describe "Handle users_getInfo_response with new empty attr" do
+    it "should return an array of User" do
+      result = Xiaonei::Parse.new.process(users_get_info_response_with_new_empty_attr_xml)
+      result.should be_a_kind_of(Array)
+      result.size.should == 1
+      result.first.should be_a_kind_of(Xiaonei::User)
+      result.first.uid.should eql("8055")
+    end
+  end
+
+  
+  describe "Handle users_getInfo_response with new attr" do
+    it "should return an array of User" do
+      result = Xiaonei::Parse.new.process(users_get_info_response_with_new_attr_xml)
+      result.should be_a_kind_of(Array)
+      result.size.should == 1
+      result.first.should be_a_kind_of(Xiaonei::User)
+      result.first.uid.should eql("8055")
+    end
+  end
+
+  
+  describe "Handle users_getInfo_response with work history" do
+    it "should return an array of User" do
+      result = Xiaonei::Parse.new.process(users_get_info_response_work_history_xml)
+      result.should be_a_kind_of(Array)
+      result.size.should == 1
+    end
+  end
+  
   describe "Handle users_getInfo_response" do
     it "should return an array of User" do
       result = Xiaonei::Parse.new.process(users_get_info_response_xml)
-      result.class.name.should == "Array"
+      result.should be_a_kind_of(Array)
       result.size.should == 1
     end
   end
@@ -32,7 +62,51 @@ describe Xiaonei::Parse do
 XML
   end
 
-    def users_get_info_response_xml
+  def users_get_info_response_with_new_empty_attr_xml
+    <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<users_getInfo_response list="true">
+  <user>
+    <uid>8055</uid>
+    <fbid/>
+  </user>
+</users_getInfo_response>
+XML
+  end
+
+  def users_get_info_response_with_new_attr_xml
+    <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<users_getInfo_response list="true">
+  <user>
+    <uid>8055</uid>
+    <fbid>12323</fbid>
+  </user>
+</users_getInfo_response>
+XML
+  end
+
+  
+  def users_get_info_response_work_history_xml
+    <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<users_getInfo_response list="true">
+  <user>
+    <uid>8055</uid>
+    <work_history list="true">
+      <work_info>
+        <company_name>千橡互联</company_name>
+        <description>一家互联网公司</description>
+        <start_date>2006-01</start_date>
+        <end_date/>
+      </work_info>
+    </work_history>
+  </user>
+</users_getInfo_response>
+XML
+  end
+
+  def users_get_info_response_xml
       <<-XML
 <?xml version="1.0" encoding="UTF-8"?>
 <users_getInfo_response list="true">
