@@ -52,6 +52,16 @@ describe Xiaonei::Parse do
     end
   end
   
+  describe "Handle friends_getFriends_response" do
+    it "should return an array of User" do
+      result = Xiaonei::Parse.new.process(friends_get_friends_response_xml)
+      result.should be_a_kind_of(Array)
+      result.size.should eql(20)
+      result.total.should eql("87") 
+    end
+  end
+
+  
   def error_response_xml
     <<-XML 
 <?xml version="1.0" encoding="UTF-8"?>

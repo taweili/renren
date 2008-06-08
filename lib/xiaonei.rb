@@ -9,5 +9,6 @@ require 'xiaonei/models/hometown_location'
 require 'xiaonei/models/university_info'
 require 'xiaonei/models/hs_info'
 require 'xiaonei/models/contact_info'
+require 'xiaonei/models/friend'
 module Xiaonei
 end

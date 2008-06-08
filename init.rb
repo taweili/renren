@@ -1,5 +1,7 @@
 xiaonei_config = "#{RAILS_ROOT}/config/xiaonei.yml"
 
+require 'xiaonei'
+
 if File.exist?(xiaonei_config)
   XIAONEI = YAML.load_file(xiaonei_config)[RAILS_ENV] 
   ENV['XIAONEI_API_KEY'] = XIAONEI['api_key']

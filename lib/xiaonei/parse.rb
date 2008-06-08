@@ -13,13 +13,16 @@ module Xiaonei
       end
       
       def model_classes
-        [ Xiaonei::Error, 
-          Xiaonei::User,
-          Xiaonei::HometownLocation,
-          Xiaonei::WorkInfo,
-          Xiaonei::HsInfo,
-          Xiaonei::ContactInfo,
-          Xiaonei::UniversityInfo ]
+        [ 
+         Xiaonei::Error, 
+         Xiaonei::User,
+         Xiaonei::HometownLocation,
+         Xiaonei::WorkInfo,
+         Xiaonei::HsInfo,
+         Xiaonei::ContactInfo,
+         Xiaonei::Friend,
+         Xiaonei::UniversityInfo 
+        ]
       end
 
       def elm_name_to_class(name)
@@ -31,6 +34,7 @@ module Xiaonei
         unless @attr_names
           @attr_names = []
           model_classes.each { |k| @attr_names += k.attr_names }
+          @attr_names += [:total]
         end
         @attr_names.include?(name.to_sym)
       end
@@ -42,7 +46,7 @@ module Xiaonei
       end
 
       def tag_start(name, attrs)
-        pp "tag_start --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}"
+        # pp "tag_start --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}"
         
         s_size = @stack.size
         if k = elm_name_to_class(name)
@@ -62,7 +66,7 @@ module Xiaonei
       end
 
       def tag_end(name)
-        pp "tag_end --- #{name} --- #{@stack.inspect}"
+        # pp "tag_end --- #{name} --- #{@stack.inspect}"
         @result = @stack.pop
         if @result == :no_op
           #
