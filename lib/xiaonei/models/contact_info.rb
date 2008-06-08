@@ -1,15 +1,17 @@
 module Xiaonei
-  class WorkInfo < Model
+  class ContactInfo < Model
     
     def self.elm_name
-      "work_info"
+      "contact_info"
     end
     
     def self.attr_names
-      [:company_name, 
-       :description,
-       :start_date,
-       :end_date]
+      [
+       :msn,
+       :mobile_tel,
+       :telephone,
+       :web_site
+      ]
     end
 
     for a in attr_names

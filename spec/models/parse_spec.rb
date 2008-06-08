@@ -16,10 +16,9 @@ describe Xiaonei::Parse do
   
   describe "Handle users_getInfo_response" do
     it "should return an array of User" do
-      result = Xiaonei::Parse.new.process(users_get_info_response_xml_simple)
+      result = Xiaonei::Parse.new.process(users_get_info_response_xml)
       result.class.name.should == "Array"
       result.size.should == 1
-      pp result
     end
   end
   
@@ -33,22 +32,6 @@ describe Xiaonei::Parse do
 XML
   end
 
-  def users_get_info_response_xml_simple
-    <<-XML
-<?xml version="1.0" encoding="UTF-8"?>
-<users_getInfo_response list="true">
-  <user>
-    <uid>8055</uid>
-    <work_history list="true">
-      <work_info>
-        <company_name>千橡互联</company_name>
-      </work_info>
-    </work_history>
-  </user>
-</users_getInfo_response>
-XML
-    end
-  
     def users_get_info_response_xml
       <<-XML
 <?xml version="1.0" encoding="UTF-8"?>

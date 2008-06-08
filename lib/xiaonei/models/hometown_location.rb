@@ -1,13 +1,16 @@
 module Xiaonei
-  class HometownLocation
-    ATTR_SYMS = [ :country, :province, :city ]
+  class HometownLocation < Model
     
-    for a in ATTR_SYMS
-      attr_accessor a
+    def self.elm_name
+      "hometown_location"
     end
     
-    def has_attr?(attr)
-      ATTR_SYMS.include?(attr.to_sym)
+    def self.attr_names
+      [ :country, :province, :city ]
+    end
+    
+    for a in attr_names
+      attr_accessor a
     end
 
   end

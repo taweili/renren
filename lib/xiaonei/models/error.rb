@@ -1,14 +1,20 @@
+require 'xiaonei/model'
+
 module Xiaonei
-  class Error
-    ATTR_SYMS = [:error_code, :error_msg]
-    for a in ATTR_SYMS
+  class Error < Model
+    
+    def self.elm_name
+      "error_response"
+    end
+    
+    def self.attr_names
+      [:error_code, :error_msg]
+    end
+    
+    for a in attr_names
       attr_accessor a
     end
     
-    def has_attr?(attr)
-      ATTR_SYMS.include?(attr.to_sym)
-    end
-
     def code
       @error_code
     end

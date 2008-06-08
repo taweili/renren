@@ -1,15 +1,13 @@
 module Xiaonei
-  class WorkInfo < Model
+  class HsInfo < Model
     
     def self.elm_name
-      "work_info"
+      "hs_info"
     end
     
     def self.attr_names
-      [:company_name, 
-       :description,
-       :start_date,
-       :end_date]
+      [:name, 
+       :grad_year]
     end
 
     for a in attr_names
