@@ -43,6 +43,8 @@ module Xiaonei
 
       def tag_start(name, attrs)
         pp "tag_start --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}"
+        
+        s_size = @stack.size
         if k = elm_name_to_class(name)
           @stack.push(k.new)
         elsif attr_name?(name)
@@ -51,29 +53,29 @@ module Xiaonei
         if attrs["list"] == "true"
           @stack.push TotalArray.new
         end
+
+        if @stack.size == s_size # nothing get push to stack
+          pp "unknown tag #{name}"
+          @stack.push :no_op
+        end
+        
       end
 
       def tag_end(name)
         pp "tag_end --- #{name} --- #{@stack.inspect}"
         @result = @stack.pop
-        if @stack.last.kind_of? Symbol
-          if @stack.last
-            s = @stack.pop
-            if @stack.last.respond_to? s
-              @stack.last.send(s, @result)
-            else
-              pp "unknown attribute #{s}"
-            end
+        if @result == :no_op
+          #
+        elsif @stack.last.kind_of? Symbol
+          s = @stack.pop
+          if s != :no_op
+            @stack.last.send(s, @result)
           end
         elsif @result.kind_of? Array and @stack.size > 0
           s = @stack.pop
           @stack.last.send(s,@result)
         elsif @result.instance_of?(Symbol)
-          if @stack.last.respond_to? @result
-            @stack.last.send(@result, nil)
-          else
-            pp "unknown attribute #{@result}"
-          end
+          @stack.last.send(@result, nil)
         elsif @stack.last.kind_of? Array
           @stack.last.push @result
         end
