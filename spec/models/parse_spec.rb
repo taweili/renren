@@ -5,6 +5,29 @@ require "xiaonei/parse"
 require 'pp'
 
 describe Xiaonei::Parse do
+
+  describe "handle return from users_getLoggedInUser_response" do
+    it "should return the user id" do
+      result = Xiaonei::Parse.new.process(users_get_logged_in_user_response_xml)
+      result.should eql("66271")
+    end
+  end
+  
+  describe "handle return from profile_getXNML_response" do
+    it "should return an array with a string" do
+      pending "Until Xiaonei fixs their XML"
+      result = Xiaonei::Parse.new.process(profile_get_xnml_response_xml)
+      pp result.inspect
+    end
+  end
+
+  describe "handle return from profile_setXNML_response" do
+    it "should return a string" do
+      result = Xiaonei::Parse.new.process(profile_set_xnml_response_xml)
+      result.should eql("1")
+    end
+  end
+
   describe "Handle error_response" do
     it "should return an Error on error_response" do
       result = Xiaonei::Parse.new.process(error_response_xml)
@@ -61,6 +84,12 @@ describe Xiaonei::Parse do
     end
   end
 
+  def users_get_logged_in_user_response_xml
+    <<-XML
+      <?xml version="1.0" encoding="UTF-8"?>
+<users_getLoggedInUser_response list="true" >66271</users_getLoggedInUser_response>
+XML
+  end
   
   def error_response_xml
     <<-XML 
@@ -95,7 +124,22 @@ XML
 </users_getInfo_response>
 XML
   end
+  
+  def profile_get_xnml_response_xml
+    <<-XML
+  <?xml version="1.0" encoding="UTF-8"?>
+<profile_getXNML list="true">
+   Hello <xn:name uid="00000" linked="true" shownetwork="true" />
+</ profile_getXNML >
+XML
+  end
 
+  def profile_set_xnml_response_xml
+    <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<profile_setXNML_response list="true" >1</profile_setXNML_response >
+XML
+  end
   
   def users_get_info_response_work_history_xml
     <<-XML
