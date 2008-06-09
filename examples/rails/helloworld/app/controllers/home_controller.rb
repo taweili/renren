@@ -1,6 +1,3 @@
-require "xiaonei/service"
-require "xiaonei/session"
-
 class HomeController < ApplicationController
   acts_as_xiaonei_controller
   
