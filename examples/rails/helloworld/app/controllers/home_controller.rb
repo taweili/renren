@@ -2,13 +2,13 @@ require "xiaonei/service"
 require "xiaonei/session"
 
 class HomeController < ApplicationController
+  acts_as_xiaonei_controller
+  
   def index
-    session = Xiaonei::Session.new()
-    session.session_key = params[:xn_sig_session_key]
-    
-    @user = session.invoke_method("xiaonei.users.getInfo", :uids => "229615263", :fields => Xiaonei::User.attr_names.join(","))
+    @user = xiaonei_session.invoke_method("xiaonei.users.getInfo", :uids => "229615263", :fields => Xiaonei::User.attr_names.join(","))
     @user = @user.first
     logger.debug("#{@user.inspect}")
-    @friends = session.invoke_method("xiaonei.friends.getFriends")
+    @friends = xiaonei_session.invoke_method("xiaonei.friends.getFriends")
+    logger.debug("#{@friends.inspect}")
   end
 end
