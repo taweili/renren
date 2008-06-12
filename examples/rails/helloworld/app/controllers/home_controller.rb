@@ -33,9 +33,17 @@ class HomeController < ApplicationController
     test_method("xiaonei.blog.addBlog", :title => "Hello from API", :body => "Post blog from API")
     
     test_method("xiaonei.photos.getAlbums", :uid => xiaonei_session.user)
+    
+    test_method("xiaonei.photos.getAlbums", :uid => xiaonei_session.user, :alubmIds => "242570156")
+    
+    test_method("xiaonei.message.gets")
+    test_method("xiaonei.message.gets", :isInbox => true)
+    
+    test_method("xiaonei.xnml.refreshRefUrl", :url => url_for(:action => 'home', :only_path => false))
+    
   end
   
-  def test_method(method, params)
+  def test_method(method, params = { })
     ret = xiaonei_session.invoke_method(method, params)
     logger.debug("#{method} --- #{ret.inspect}")
   end

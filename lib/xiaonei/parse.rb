@@ -22,7 +22,8 @@ module Xiaonei
          Xiaonei::ContactInfo,
          Xiaonei::Friend,
          Xiaonei::UniversityInfo,
-         Xiaonei::Album
+         Xiaonei::Album,
+         Xiaonei::Messages
         ]
       end
 

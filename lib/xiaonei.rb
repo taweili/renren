@@ -11,5 +11,6 @@ require 'xiaonei/models/hs_info'
 require 'xiaonei/models/contact_info'
 require 'xiaonei/models/friend'
 require 'xiaonei/models/album'
+require 'xiaonei/models/messages'
 module Xiaonei
 end
