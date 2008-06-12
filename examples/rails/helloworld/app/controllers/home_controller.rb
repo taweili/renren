@@ -36,7 +36,10 @@ class HomeController < ApplicationController
     
     test_method("xiaonei.photos.getAlbums", :uid => xiaonei_session.user, :alubmIds => "242570156")
     
+    test_method("xiaonei.photos.get", :uid => xiaonei_session.user, :aid => "242570156")
+    
     test_method("xiaonei.message.gets")
+    
     test_method("xiaonei.message.gets", :isInbox => true)
     
     test_method("xiaonei.xnml.refreshRefUrl", :url => url_for(:action => 'home', :only_path => false))

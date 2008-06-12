@@ -4,7 +4,7 @@ require 'pp'
 
 module Xiaonei
   class Parse
-    DEBUG = false
+    DEBUG = true
     class MyListener
       include REXML::StreamListener
       attr_accessor :result
@@ -25,7 +25,8 @@ module Xiaonei
          Xiaonei::UniversityInfo,
          Xiaonei::Album,
          Xiaonei::Messages,
-         Xiaonei::Blogs
+         Xiaonei::Blogs,
+         Xiaonei::Photo
         ]
       end
 

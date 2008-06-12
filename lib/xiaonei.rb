@@ -13,5 +13,6 @@ require 'xiaonei/models/friend'
 require 'xiaonei/models/album'
 require 'xiaonei/models/messages'
 require 'xiaonei/models/blogs'
+require 'xiaonei/models/photo'
 module Xiaonei
 end
