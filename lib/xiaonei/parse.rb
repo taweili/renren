@@ -4,6 +4,7 @@ require 'pp'
 
 module Xiaonei
   class Parse
+    DEBUG = false
     class MyListener
       include REXML::StreamListener
       attr_accessor :result
@@ -23,7 +24,8 @@ module Xiaonei
          Xiaonei::Friend,
          Xiaonei::UniversityInfo,
          Xiaonei::Album,
-         Xiaonei::Messages
+         Xiaonei::Messages,
+         Xiaonei::Blogs
         ]
       end
 
@@ -48,7 +50,7 @@ module Xiaonei
       end
 
       def tag_start(name, attrs)
-        # pp "tag_start --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}"
+        pp("tag_start --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}") if DEBUG
         
         s_size = @stack.size
         if k = elm_name_to_class(name)
@@ -68,7 +70,7 @@ module Xiaonei
       end
 
       def tag_end(name)
-        # pp "tag_end --- #{name} --- #{@stack.inspect}"
+        pp("tag_end --- #{name} --- #{@stack.inspect}") if DEBUG
         @result = @stack.pop
         if @result == :no_op
           #
@@ -97,7 +99,7 @@ module Xiaonei
 
     def process(data)
       listener = MyListener.new
-      pp "parse --- #{data}"
+      pp("parse --- #{data}") if DEBUG
       REXML::Document.parse_stream(data, listener)
       listener.result
     rescue Exception => e
