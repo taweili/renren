@@ -17,5 +17,12 @@ class HomeController < ApplicationController
     
     @friends = xiaonei_session.invoke_method("xiaonei.friends.getFriends")
     logger.debug("#{@friends.inspect}")
+    
+    @are_friends = xiaonei_session.invoke_method("xiaonei.friends.areFriends", :uid1 => "243357028", :uid2 => "223351886")
+    logger.debug("#{@are_friends.inspect}")
+    
+    @app_friends = xiaonei_session.invoke_method("xiaonei.friends.getAppUsers")
+    logger.debug("#{@app_friends.inspect}")
+
   end
 end
