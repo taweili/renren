@@ -83,6 +83,33 @@ describe Xiaonei::Parse do
       result.total.should eql("87") 
     end
   end
+  
+  describe "photos_getAlbums_response" do
+    it "should return an array of Album" do
+      result = Xiaonei::Parse.new.process(friends_get_friends_response_xml)
+      result.should be_a_kind_of(Array)
+      result.size.should eql(20)
+      result.total.should eql("87") 
+    end
+  end
+
+  
+  def photos_get_albums_response_xml
+    <<-XML
+    <photos_getAlbums_response list="true">
+  <total>1</total>
+  <album>
+    <aid>242570156</aid>
+    <uid>243357028</uid>
+    <url>http://fm481.img.xiaonei.com/pic001/20080509/21/58/main_5827e70.jpg</url>
+    <name>人像</name>
+    <size>2</size>
+    <create_time>2008-05-09 10:00:59</create_time>
+    <update_time>2008-05-09 10:02:04</update_time>
+  </album>
+</photos_getAlbums_response>
+XML
+  end
 
   def users_get_logged_in_user_response_xml
     <<-XML

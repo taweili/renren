@@ -21,7 +21,8 @@ module Xiaonei
          Xiaonei::HsInfo,
          Xiaonei::ContactInfo,
          Xiaonei::Friend,
-         Xiaonei::UniversityInfo 
+         Xiaonei::UniversityInfo,
+         Xiaonei::Album
         ]
       end
 
@@ -95,8 +96,12 @@ module Xiaonei
 
     def process(data)
       listener = MyListener.new
+      pp "parse --- #{data}"
       REXML::Document.parse_stream(data, listener)
       listener.result
+    rescue Exception => e
+      pp e
+      nil
     end
   end
 end
