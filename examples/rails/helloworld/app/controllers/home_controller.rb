@@ -43,13 +43,15 @@ class HomeController < ApplicationController
     test_method("xiaonei.message.gets", :isInbox => true)
     
     test_method("xiaonei.xnml.refreshRefUrl", :url => url_for(:action => 'home', :only_path => false))
+
+    test_method("xiaonei.wall.getPosts", :uid => xiaonei_session.user)
     
+    # test_method("xiaonei.wall.addPost", :uid => xiaonei_session.user, :content => "David post from API #{Time.now}")
+
   end
   
   def test
-    test_method("xiaonei.wall.getPosts", :uid => xiaonei_session.user)
-    
-    test_method("xiaonei.wall.addPost", :uid => xiaonei_session.user, :content => "David post from API #{Time.now}")
+    test_method("xiaonei.requests.poke", :uid => "246353875")
   end
   
   protected
