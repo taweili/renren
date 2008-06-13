@@ -1,20 +1,19 @@
 module Xiaonei
-  class Blogs < Array
+  class Comment < Model
     
     def self.elm_name
-      "blog_gets_response"
+      "comment"
     end
     
     def self.attr_names
       [
+       :id,
        :uid,
        :name,
-       :total
+       :time,
+       :tinyurl,
+       :text
       ]
-    end
-
-    def self.is_array?
-      true
     end
 
     for a in attr_names

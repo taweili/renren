@@ -1,20 +1,17 @@
 module Xiaonei
-  class Blogs < Array
+  class Guest < Model
     
     def self.elm_name
-      "blog_gets_response"
+      "guest"
     end
     
     def self.attr_names
       [
+       :headurl,
        :uid,
        :name,
-       :total
+       :network
       ]
-    end
-
-    def self.is_array?
-      true
     end
 
     for a in attr_names

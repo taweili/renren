@@ -1,15 +1,16 @@
 module Xiaonei
-  class Blogs < Array
+  class WallPosts < Model
     
     def self.elm_name
-      "blog_gets_response"
+      "wall_getPosts_response"
     end
     
     def self.attr_names
       [
        :uid,
        :name,
-       :total
+       :total,
+       :comments
       ]
     end
 

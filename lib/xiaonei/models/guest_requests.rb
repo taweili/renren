@@ -1,14 +1,12 @@
 module Xiaonei
-  class Blogs < Array
+  class GuestRequests < Array
     
     def self.elm_name
-      "blog_gets_response"
+      "requests_getGuestRequests_response"
     end
     
     def self.attr_names
       [
-       :uid,
-       :name,
        :total
       ]
     end

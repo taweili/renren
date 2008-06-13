@@ -13,6 +13,13 @@ require 'xiaonei/models/friend'
 require 'xiaonei/models/album'
 require 'xiaonei/models/messages'
 require 'xiaonei/models/blogs'
+require 'xiaonei/models/blog'
 require 'xiaonei/models/photo'
+require 'xiaonei/models/guest_requests'
+require 'xiaonei/models/guest'
+require 'xiaonei/models/poke'
+require 'xiaonei/models/wall_posts'
+require 'xiaonei/models/wall_post'
+require 'xiaonei/models/comment'
 module Xiaonei
 end

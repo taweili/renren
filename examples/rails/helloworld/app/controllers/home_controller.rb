@@ -30,7 +30,7 @@ class HomeController < ApplicationController
     
     test_method("xiaonei.blog.gets", :uid => xiaonei_session.user)
     
-    test_method("xiaonei.blog.addBlog", :title => "Hello from API", :body => "Post blog from API")
+    test_method("xiaonei.blog.addBlog", :title => "Hello from API", :content => "Post blog from API")
     
     test_method("xiaonei.photos.getAlbums", :uid => xiaonei_session.user)
     
@@ -45,6 +45,14 @@ class HomeController < ApplicationController
     test_method("xiaonei.xnml.refreshRefUrl", :url => url_for(:action => 'home', :only_path => false))
     
   end
+  
+  def test
+    test_method("xiaonei.wall.getPosts", :uid => xiaonei_session.user)
+    
+    test_method("xiaonei.wall.addPost", :uid => xiaonei_session.user, :content => "David post from API #{Time.now}")
+  end
+  
+  protected
   
   def test_method(method, params = { })
     ret = xiaonei_session.invoke_method(method, params)

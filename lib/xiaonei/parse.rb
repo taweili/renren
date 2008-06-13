@@ -13,6 +13,12 @@ module Xiaonei
         attr_accessor :total
       end
       
+      class Blogs < Array
+        attr_accessor :total
+        attr_accessor :uid
+        attr_accessor :name
+      end
+      
       def model_classes
         [ 
          Xiaonei::Error, 
@@ -26,7 +32,14 @@ module Xiaonei
          Xiaonei::Album,
          Xiaonei::Messages,
          Xiaonei::Blogs,
-         Xiaonei::Photo
+         Xiaonei::Blog,
+         Xiaonei::Photo,
+         Xiaonei::GuestRequests,
+         Xiaonei::Guest,
+         Xiaonei::Poke,
+         Xiaonei::WallPosts,
+         Xiaonei::WallPost,
+         Xiaonei::Comment
         ]
       end
 
@@ -51,7 +64,7 @@ module Xiaonei
       end
 
       def tag_start(name, attrs)
-        pp("tag_start --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}") if DEBUG
+        pp("tag_start[begin] --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}") if DEBUG
         
         s_size = @stack.size
         if k = elm_name_to_class(name)
@@ -59,8 +72,11 @@ module Xiaonei
         elsif attr_name?(name)
           @stack.push("#{name}=".to_sym)
         end
+        
         if attrs["list"] == "true"
-          @stack.push TotalArray.new
+          unless elm_name_to_class(name) and elm_name_to_class(name).is_array?
+            @stack.push TotalArray.new
+          end
         end
 
         if @stack.size == s_size # nothing get push to stack
@@ -68,10 +84,12 @@ module Xiaonei
           @stack.push :no_op
         end
         
+        pp("tag_start[end] --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}") if DEBUG
       end
 
       def tag_end(name)
-        pp("tag_end --- #{name} --- #{@stack.inspect}") if DEBUG
+        pp("tag_end[begin] --- #{name} --- #{@stack.inspect}") if DEBUG
+        
         @result = @stack.pop
         if @result == :no_op
           #
@@ -88,6 +106,8 @@ module Xiaonei
         elsif @stack.last.kind_of? Array
           @stack.last.push @result
         end
+        
+        pp("tag_end[end] --- #{name} --- #{@stack.inspect} --- #{@result}") if DEBUG
       end
       
       def text(text)

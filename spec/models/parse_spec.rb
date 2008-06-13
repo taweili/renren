@@ -92,8 +92,200 @@ describe Xiaonei::Parse do
       result.total.should eql("87") 
     end
   end
-
   
+  describe "blog_gets_response" do
+    it "should return an array of blogs" do
+      result = Xiaonei::Parse.new.process(blog_gets_response_xml)
+      result.should be_a_kind_of(Array)
+      result.size.should eql(2)
+    end
+  end
+  
+  describe "requests_get_guest_requests_response" do
+    it "should return an array of guests" do
+      result = Xiaonei::Parse.new.process(requests_get_guest_requests_response_xml)
+      result.should be_a_kind_of(Array)
+      result.size.should eql(1)
+    end
+  end
+  
+  describe "requests_get_pokes_response" do
+    it "should return an array of pokes" do
+      result = Xiaonei::Parse.new.process(requests_get_pokes_response_xml)
+      result.should be_a_kind_of(Array)
+      result.size.should eql(1)
+    end
+  end
+  
+  describe "wall_get_posts_response" do
+    it "should return an array of comments" do
+      result = Xiaonei::Parse.new.process(wall_get_posts_response_xml)
+      result.total.should eql("73")
+    end
+  end
+  
+  describe "wall_add_post_response" do
+    it "should return an WallPost with id" do
+      result = Xiaonei::Parse.new.process(wall_add_post_response_xml)
+      result.id.should eql("2471453823")
+    end
+  end
+
+
+  def wall_add_post_response_xml
+    <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<wall_addPost_response>
+  <id>2471453823</id>
+</wall_addPost_response>"
+XML
+  end
+  def wall_get_posts_response_xml
+    <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<wall_getPosts_response>
+  <uid>243357028</uid>
+  <name>李大维</name>
+  <total>73</total>
+  <comments list="true">
+    <comment>
+      <id>2466480665</id>
+      <uid>200234934</uid>
+      <name>王兴宗</name>
+      <time>2008-06-12 03:15:00</time>
+      <tinyurl>http://head.xiaonei.com/photos/20070616/13/37/tiny36939.jpg</tinyurl>
+      <text>回复李大维：thanks!\r\nlearning ruby 这本书我看过了。最后用那个实例addressbook还没有调试成功，在生成脚手架的时候书上的代码是这样的：XXXXXXenreate scaffold address address\r\n\r\n我输入的时候却返回参数错误&amp;lt;2 for 1&amp;gt;.\r\n我只用一个参数address的时候却能成功生成。\r\n但是在浏览器打开localhost：3000/address 的时候却返回找不到表addresses。数据库里确实有这个表。。。。。。\r\nwhy？？\r\n和平台有关系吗？\r\n我用的是windows xp\r\ninstall rails 2.0.2</text>
+    </comment>
+    <comment>
+      <id>2466142031</id>
+      <uid>238943997</uid>
+      <name>sophia</name>
+      <time>2008-06-12 02:11:50</time>
+      <tinyurl>http://hd27.xiaonei.com/photos/hd27/20080611/16/33/tiny_3207h169.jpg</tinyurl>
+      <text>回复李大维：晓得鸟~ 福松同学也不在线，这些交互接口，估计还得再等待一阵，才能实现：）</text>
+    </comment>
+    <comment>
+      <id>2466074386</id>
+      <uid>238943997</uid>
+      <name>sophia</name>
+      <time>2008-06-12 01:59:00</time>
+      <tinyurl>http://hd27.xiaonei.com/photos/hd27/20080611/16/33/tiny_3207h169.jpg</tinyurl>
+      <text>回复李大维：技术 看完了，说这些通知好友呀，短信呀的接口都没有开放呢，不能使用呀：（</text>
+    </comment>
+    <comment>
+      <id>2465538345</id>
+      <uid>238943997</uid>
+      <name>sophia</name>
+      <time>2008-06-12 12:33:43</time>
+      <tinyurl>http://hd27.xiaonei.com/photos/hd27/20080611/16/33/tiny_3207h169.jpg</tinyurl>
+      <text>回复李大维：谢鸟~</text>
+    </comment>
+    <comment>
+      <id>2465077760</id>
+      <uid>243357028</uid>
+      <name>李大维</name>
+      <time>2008-06-12 11:15:35</time>
+      <tinyurl>http://hd51.xiaonei.com/photos/hd51/20080504/00/09/tiny_10137n107.jpg</tinyurl>
+      <text>回复sophia：\n\nhttp://group.xiaonei.com/GetThread.do?id=326001767&amp;amp;curpage=0&amp;amp;parentpage=0&amp;amp;tribeId=237768885</text>
+    </comment>
+    <comment>
+      <id>2465025685</id>
+      <uid>238943997</uid>
+      <name>sophia</name>
+      <time>2008-06-12 11:05:33</time>
+      <tinyurl>http://hd27.xiaonei.com/photos/hd27/20080611/16/33/tiny_3207h169.jpg</tinyurl>
+      <text>回复李大维：丁懿 问你的这个问题，我也想问下，但不知道在论坛的什么位置可以看到你的回复？ THX</text>
+    </comment>
+    <comment>
+      <id>2464577601</id>
+      <uid>243357028</uid>
+      <name>李大维</name>
+      <time>2008-06-12 09:34:01</time>
+      <tinyurl>http://hd51.xiaonei.com/photos/hd51/20080504/00/09/tiny_10137n107.jpg</tinyurl>
+      <text>回复丁懿：在论坛上回复了。;&amp;#41;</text>
+    </comment>
+    <comment>
+      <id>2464564237</id>
+      <uid>234960294</uid>
+      <name>丁懿</name>
+      <time>2008-06-12 09:30:26</time>
+      <tinyurl>http://hd51.xiaonei.com/photos/hd51/20080609/15/47/tiny_4301p169.jpg</tinyurl>
+      <text>你好，请教一个问题\r\n怎么在校内api应用中实现向好友发送提示信息，比如做了一个东西，怎么提示好友发生了这么一件事</text>
+    </comment>
+    <comment>
+      <id>2464038097</id>
+      <uid>243357028</uid>
+      <name>李大维</name>
+      <time>2008-06-12 12:48:59</time>
+      <tinyurl>http://hd51.xiaonei.com/photos/hd51/20080504/00/09/tiny_10137n107.jpg</tinyurl>
+      <text>回复陆俊江：大家一起讨论。;&amp;#41;</text>
+    </comment>
+    <comment>
+      <id>2463972037</id>
+      <uid>224140423</uid>
+      <name>陆俊江</name>
+      <time>2008-06-12 12:31:56</time>
+      <tinyurl>http://hd15.xiaonei.com/photos/hd15/20080603/23/19/tiny_6320f107.jpg</tinyurl>
+      <text>牛哥，我要向你学习啊</text>
+    </comment>
+  </comments>
+</wall_getPosts_response>
+XML
+  end
+  def requests_get_pokes_response_xml
+    <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<requests_getPokes_response list="true">
+  <total>1</total>
+  <poke>
+    <uid>246353875</uid>
+    <name>李大维</name>
+    <time>2008-06-13 08:02:33</time>
+    <id>632699651</id>
+  </poke>
+</requests_getPokes_response>
+XML
+  end
+
+  def requests_get_guest_requests_response_xml
+  <<-XML
+  <?xml version="1.0" encoding="UTF-8"?>
+<requests_getGuestRequests_response list="true">
+  <total>1</total>
+  <guest>
+    <headurl>http://head.xiaonei.com/photos/0/0/head.jpg</headurl>
+    <uid>246353875</uid>
+    <name>李大维</name>
+    <network>上海市</network>
+  </guest>
+</requests_getGuestRequests_response>
+XML
+  end
+  
+  def blog_gets_response_xml
+    <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<blog_gets_response list="true">
+  <uid>243357028</uid>
+  <name>李大维</name>
+  <total>2</total>
+  <blog>
+    <id>301567087</id>
+    <title>为什么校内的XML资料结构那么奇怪呢？</title>
+    <time>2008-06-13 07:25:14</time>
+    <view_count>1</view_count>
+    <comment_count>0</comment_count>
+  </blog>
+  <blog>
+    <id>301566923</id>
+    <title>反向工程校内API</title>
+    <time>2008-06-13 07:19:35</time>
+    <view_count>1</view_count>
+    <comment_count>0</comment_count>
+  </blog>
+</blog_gets_response>
+XML
+  end
   def photos_get_albums_response_xml
     <<-XML
     <photos_getAlbums_response list="true">
