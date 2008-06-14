@@ -62,7 +62,7 @@ Rails::Initializer.run do |config|
   # like if you have constraints or database-specific column types
   # config.active_record.schema_format = :sql
   
-   # Disable request forgery protection in test environment
+  # Disable request forgery protection in test environment
   config.action_controller.allow_forgery_protection = false
 
   # Activate observers that should always be running
