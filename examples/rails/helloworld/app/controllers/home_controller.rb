@@ -51,7 +51,8 @@ class HomeController < ApplicationController
   end
   
   def test
-    test_method("xiaonei.requests.poke", :uid => "246353875")
+    # test_method("xiaonei.requests.poke", :uid => "246353875")
+    test_method("xiaonei.blog.gets", :uid => xiaonei_session.user)
   end
   
   protected
