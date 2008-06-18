@@ -11,12 +11,18 @@ module Xiaonei
 
       class TotalArray < Array
         attr_accessor :total
+        def self.is_array?
+          true
+        end
       end
       
-      class Blogs < Array
-        attr_accessor :total
-        attr_accessor :uid
-        attr_accessor :name
+      class UidArray < Array
+        def uid=(id)
+          self << id
+        end
+        def self.is_array?
+          true
+        end
       end
       
       def model_classes
@@ -42,9 +48,16 @@ module Xiaonei
          Xiaonei::Comment
         ]
       end
-
+      
+      def array_elements
+        { 
+          "friends_getAppUsers_response" => UidArray,
+          "profile_setXNML_response" => TotalArray
+        }
+      end
+      
       def elm_name_to_class(name)
-        @name_to_class ||= Hash[*(model_classes.collect {|v| [v.elm_name, v]}.flatten)]
+        @name_to_class ||= Hash[*(model_classes.collect {|v| [v.elm_name, v]}.flatten)].merge!(array_elements)
         @name_to_class[name]
       end
       
@@ -64,7 +77,7 @@ module Xiaonei
       end
 
       def tag_start(name, attrs)
-        pp("tag_start[begin] --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}") if DEBUG
+        pp("  tag_start[begin] --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}") if DEBUG
         
         s_size = @stack.size
         if k = elm_name_to_class(name)
@@ -84,11 +97,11 @@ module Xiaonei
           @stack.push :no_op
         end
         
-        pp("tag_start[end] --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}") if DEBUG
+        pp("  tag_start[end] --- #{name} --- #{attrs.inspect} --- #{@stack.inspect}") if DEBUG
       end
 
       def tag_end(name)
-        pp("tag_end[begin] --- #{name} --- #{@stack.inspect}") if DEBUG
+        pp("  tag_end[begin] --- #{name} --- #{@stack.inspect}") if DEBUG
         
         @result = @stack.pop
         if @result == :no_op
@@ -107,7 +120,7 @@ module Xiaonei
           @stack.last.push @result
         end
         
-        pp("tag_end[end] --- #{name} --- #{@stack.inspect} --- #{@result}") if DEBUG
+        pp("  tag_end[end] --- #{name} --- #{@stack.inspect} --- #{@result}") if DEBUG
       end
       
       def text(text)
@@ -120,7 +133,7 @@ module Xiaonei
 
     def process(data)
       listener = MyListener.new
-      pp("parse --- #{data}") if DEBUG
+      pp("  parse --- #{data}") if DEBUG
       REXML::Document.parse_stream(data, listener)
       listener.result
     rescue Exception => e

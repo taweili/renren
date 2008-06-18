@@ -27,6 +27,14 @@ describe Xiaonei::Parse do
       result.should eql("1")
     end
   end
+  
+  describe "handle return from profile_setXNML_response" do
+    it "should return nil" do
+      result = Xiaonei::Parse.new.process(empty_profile_set_xnml_response_xml)
+      result.should eql(nil)
+    end
+  end
+
 
   describe "Handle error_response" do
     it "should return an Error on error_response" do
@@ -131,7 +139,41 @@ describe Xiaonei::Parse do
     end
   end
 
+  describe "friends_getAppUsers_response" do
+    it "should return an array of User" do
+      result = Xiaonei::Parse.new.process(friends_get_app_users_response_xml)
+      result.size.should eql(2)
+      result[0].should eql("222332")
+      result[1].should eql("222333")
+    end
 
+    it "should return an empty array" do
+      result = Xiaonei::Parse.new.process(empty_friends_get_app_users_response_xml)
+      result.size.should eql(0)
+    end
+    
+  end
+
+  def empty_friends_get_app_users_response_xml
+    <<-XML
+      <?xml version="1.0" encoding="UTF-8"?>
+      <friends_getAppUsers_response 
+         xmlns="http://api.xiaonei.com/1.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:schemaLocation="http://api.xiaonei.com/1.0/ http://api.xiaonei.com/1.0/xiaonei.xsd">
+      </friends_getAppUsers_response>
+    XML
+  end
+  
+  def friends_get_app_users_response_xml
+    <<-XML
+      <friends_getAppUsers_response list="true">
+        <uid>222332</uid>
+        <uid>222333</uid> 
+      </friends_getAppUsers_response>
+    XML
+  end
+  
   def wall_add_post_response_xml
     <<-XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -232,6 +274,7 @@ XML
 </wall_getPosts_response>
 XML
   end
+  
   def requests_get_pokes_response_xml
     <<-XML
 <?xml version="1.0" encoding="UTF-8"?>
@@ -326,7 +369,6 @@ XML
 <users_getInfo_response list="true">
   <user>
     <uid>8055</uid>
-    <fbid/>
   </user>
 </users_getInfo_response>
 XML
@@ -338,7 +380,6 @@ XML
 <users_getInfo_response list="true">
   <user>
     <uid>8055</uid>
-    <fbid>12323</fbid>
   </user>
 </users_getInfo_response>
 XML
@@ -356,9 +397,17 @@ XML
   def profile_set_xnml_response_xml
     <<-XML
 <?xml version="1.0" encoding="UTF-8"?>
-<profile_setXNML_response list="true" >1</profile_setXNML_response >
+<profile_setXNML_response list="true">1</profile_setXNML_response>
 XML
   end
+  
+  def empty_profile_set_xnml_response_xml
+    <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<profile_setXNML_response</profile_setXNML_response>
+XML
+  end
+
   
   def users_get_info_response_work_history_xml
     <<-XML
