@@ -31,7 +31,7 @@ describe Xiaonei::Parse do
   describe "handle return from profile_setXNML_response" do
     it "should return nil" do
       result = Xiaonei::Parse.new.process(empty_profile_set_xnml_response_xml)
-      result.should eql(nil)
+      result.should eql([])
     end
   end
 
@@ -153,6 +153,29 @@ describe Xiaonei::Parse do
     end
     
   end
+  
+  describe "requests_sendRequest_response" do
+    it "should return an array of User" do
+      result = Xiaonei::Parse.new.process(requests_send_request_response_xml)
+      result.size.should eql(2)
+      result[0].should eql("123")
+      result[1].should eql("223")
+    end
+  end
+
+  
+  def requests_send_request_response_xml
+    <<-XML
+      <?xml version="1.0" encoding="UTF-8"?>
+      <requests_sendRequest_response xmlns="http://api.xiaonei.com/1.0/"
+	                             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	                             xsi:schemaLocation="http://api.xiaonei.com/1.0/ http://api.xiaonei.com/1.0/xiaonei.xsd">
+	<uid>123</uid>
+	<uid>223</uid>
+      </requests_sendRequest_response>
+    XML
+  end
+
 
   def empty_friends_get_app_users_response_xml
     <<-XML
@@ -404,7 +427,7 @@ XML
   def empty_profile_set_xnml_response_xml
     <<-XML
 <?xml version="1.0" encoding="UTF-8"?>
-<profile_setXNML_response</profile_setXNML_response>
+<profile_setXNML_response></profile_setXNML_response>
 XML
   end
 

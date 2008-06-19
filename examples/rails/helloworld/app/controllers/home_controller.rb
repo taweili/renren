@@ -49,7 +49,8 @@ class HomeController < ApplicationController
     test_method("xiaonei.wall.getPosts", :uid => xiaonei_session.user)
     
     test_method("xiaonei.wall.addPost", :uid => xiaonei_session.user, :content => "David post from API #{Time.now}")
-
+    
+    test_method("xiaonei.requests.sendRequest", :uids => "246353875")
   end
   
   def test
