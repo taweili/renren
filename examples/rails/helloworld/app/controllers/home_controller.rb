@@ -8,7 +8,7 @@ class HomeController < ApplicationController
     @logged_in_user = xiaonei_session.invoke_method("xiaonei.users.getLoggedInUser")
     logger.debug("------xiaonei.users.getLoggedInUser --- #{@logged_in_user.inspect}")
 
-    @set_xnml = xiaonei_session.invoke_method("xiaonei.profile.setXNML", :profile => "Hello World")
+    @set_xnml = xiaonei_session.invoke_method("xiaonei.profile.setXNML", :profile => "Hello World", :profile_action => "http://apps.xiaonei.com/taweili/home")
     logger.debug("------xiaonei.profile.setXNML --- #{@set_xnml.inspect}")
     
     @user = xiaonei_session.invoke_method("xiaonei.users.getInfo", :uids => "229615263", :fields => Xiaonei::User.attr_names.join(","))
@@ -26,7 +26,7 @@ class HomeController < ApplicationController
     
     test_method("xiaonei.profile.getXNML", :uid => xiaonei_session.user)
     
-    test_method("xiaonei.feed.publishActionOfUser", :title => "hello world", :body => "hello")
+    test_method("xiaonei.feed.publishActionOfUser", :title => "<xn:name uid='#{xiaonei_session.user}'/> loves David", :body => "<xn:name uid='#{xiaonei_session.user}'/> loves David #{Time.now}")
     
     test_method("xiaonei.feed.publishActionToUser", :title => "hello world", :body => "hello")
     
