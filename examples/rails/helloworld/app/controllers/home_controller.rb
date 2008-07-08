@@ -8,15 +8,15 @@ class HomeController < ApplicationController
     @logged_in_user = xiaonei_session.invoke_method("xiaonei.users.getLoggedInUser")
     logger.debug("------xiaonei.users.getLoggedInUser --- #{@logged_in_user.inspect}")
 
-    @set_xnml = xiaonei_session.invoke_method("xiaonei.profile.setXNML", :profile => "Hello World", :profile_action => "http://apps.xiaonei.com/taweili/home")
+    @set_xnml = xiaonei_session.invoke_method("xiaonei.profile.setXNML", :uid => xiaonei_session.user, :profile => "Hello World", :profile_action => "http://apps.xiaonei.com/taweili/home")
     logger.debug("------xiaonei.profile.setXNML --- #{@set_xnml.inspect}")
     
     @user = xiaonei_session.invoke_method("xiaonei.users.getInfo", :uids => "229615263", :fields => Xiaonei::User.attr_names.join(","))
     @user = @user.first
     logger.debug("------xiaonei.users.getInfo --- #{@user.inspect}")
     
-    @friends = xiaonei_session.invoke_method("xiaonei.friends.getFriends")
-    logger.debug("------xiaonei.friends.getFriends --- #{@friends.inspect}")
+     @friends = xiaonei_session.invoke_method("xiaonei.friends.getFriends")
+     logger.debug("------xiaonei.friends.getFriends --- #{@friends.inspect}")
     
     @are_friends = xiaonei_session.invoke_method("xiaonei.friends.areFriends", :uid1 => "243357028", :uid2 => "223351886")
     logger.debug("------xiaonei.friends.areFriends --- #{@are_friends.inspect}")
@@ -51,6 +51,8 @@ class HomeController < ApplicationController
     test_method("xiaonei.wall.addPost", :uid => xiaonei_session.user, :content => "David post from API #{Time.now}")
     
     test_method("xiaonei.requests.sendRequest", :uids => "246353875")
+    
+    test_method("xiaonei.feed.publishTemplatizedAction", :template_id => 1, :body_data => {}.to_json, :title_data => {}.to_json)
   end
   
   def test

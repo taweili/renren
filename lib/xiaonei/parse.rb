@@ -53,6 +53,7 @@ module Xiaonei
         { 
           "friends_getAppUsers_response" => UidArray,
           "requests_sendRequest_response" => UidArray,
+          "feed_publishTemplatizedAction_response" => TotalArray,
           "profile_setXNML_response" => TotalArray
         }
       end
@@ -128,6 +129,10 @@ module Xiaonei
         if (t = text.strip) != ""
           @stack.push t
         end
+      end
+      
+      def cdata(data)
+        text(data)
       end
       
     end

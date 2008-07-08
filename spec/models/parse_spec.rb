@@ -123,6 +123,14 @@ describe Xiaonei::Parse do
       result.should be_a_kind_of(Array)
       result.size.should eql(1)
     end
+    
+    it "should return an array of pokes" do
+      result = Xiaonei::Parse.new.process(requests_get_pokes_response_cdata_xml)
+      result.should be_a_kind_of(Array)
+      result.size.should eql(1)
+      result[0].name.should eql("李大维")
+    end
+
   end
   
   describe "wall_get_posts_response" do
@@ -312,6 +320,22 @@ XML
 </requests_getPokes_response>
 XML
   end
+  
+  def requests_get_pokes_response_cdata_xml
+    <<-XML
+<?xml version="1.0" encoding="UTF-8"?>
+<requests_getPokes_response list="true">
+  <total>1</total>
+  <poke>
+    <uid>246353875</uid>
+    <name><![CDATA[李大维]]></name>
+    <time>2008-06-13 08:02:33</time>
+    <id>632699651</id>
+  </poke>
+</requests_getPokes_response>
+XML
+  end
+
 
   def requests_get_guest_requests_response_xml
   <<-XML
