@@ -54,7 +54,8 @@ module Xiaonei
           "friends_getAppUsers_response" => UidArray,
           "requests_sendRequest_response" => UidArray,
           "feed_publishTemplatizedAction_response" => TotalArray,
-          "profile_setXNML_response" => TotalArray
+          "profile_setXNML_response" => TotalArray,
+          "notifications_send_response" => TotalArray
         }
       end
       

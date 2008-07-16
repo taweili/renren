@@ -53,6 +53,8 @@ class HomeController < ApplicationController
     test_method("xiaonei.requests.sendRequest", :uids => "246353875")
     
     test_method("xiaonei.feed.publishTemplatizedAction", :template_id => 1, :body_data => {}.to_json, :title_data => {}.to_json)
+    
+    test_method("xiaonei.notifications.send", :to_ids => "<%=xiaonei_session.user%>", :notification => "<xn:name uid='243357028'/> is testing <a href='http://www.hainei.com'>Notification</a>")
   end
   
   def test
