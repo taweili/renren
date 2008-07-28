@@ -170,8 +170,25 @@ describe Xiaonei::Parse do
       result[1].should eql("223")
     end
   end
-
   
+  describe "auth_getSession_response" do
+    it "should return a session_key" do 
+      result = Xiaonei::Parse.new.process(auth_get_session_response_xml)
+    end
+  end
+
+  def auth_get_session_response_xml
+    <<-XML
+      <?xml version="1.0" encoding="UTF-8"?>
+      <auth_getSession_response 
+         xmlns="http://api.xiaonei.com/1.0/" 
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+         xsi:SchemaLocation="http://api.xiaonei.com/1.0/xiaonei.xsd">
+        <session_key>ttl1vNZ+v4DDbw4WP3fS+iopMhY0UvpXlmKQVBC4v9rEkpoTavJGb0E/gVYBjosV-230034168</session_key>
+        <uid>230034168</uid>
+      </auth_getSession_response>	
+    XML
+  end
   def requests_send_request_response_xml
     <<-XML
       <?xml version="1.0" encoding="UTF-8"?>
