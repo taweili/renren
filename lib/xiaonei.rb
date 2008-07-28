@@ -21,5 +21,6 @@ require 'xiaonei/models/poke'
 require 'xiaonei/models/wall_posts'
 require 'xiaonei/models/wall_post'
 require 'xiaonei/models/comment'
+require 'xiaonei/models/key'
 module Xiaonei
 end

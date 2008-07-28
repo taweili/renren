@@ -174,6 +174,8 @@ describe Xiaonei::Parse do
   describe "auth_getSession_response" do
     it "should return a session_key" do 
       result = Xiaonei::Parse.new.process(auth_get_session_response_xml)
+      result.session_key.should eql("ttl1vNZ+v4DDbw4WP3fS+iopMhY0UvpXlmKQVBC4v9rEkpoTavJGb0E/gVYBjosV-230034168")
+      result.uid.should eql("230034168")
     end
   end
 
@@ -189,6 +191,7 @@ describe Xiaonei::Parse do
       </auth_getSession_response>	
     XML
   end
+  
   def requests_send_request_response_xml
     <<-XML
       <?xml version="1.0" encoding="UTF-8"?>

@@ -45,7 +45,8 @@ module Xiaonei
          Xiaonei::Poke,
          Xiaonei::WallPosts,
          Xiaonei::WallPost,
-         Xiaonei::Comment
+         Xiaonei::Comment,
+         Xiaonei::Key
         ]
       end
       
