@@ -1,6 +1,13 @@
 class HomeController < ApplicationController
   acts_as_xiaonei_controller
   
+  def info
+    @user = xiaonei_session.invoke_method("xiaonei.users.getInfo", :uids => "243357028", :fields => "uid,name,birthday,headurl")
+    @user = @user.first
+    logger.debug("------xiaonei.users.getInfo --- #{@user.inspect}")
+    render :action => :index
+  end
+  
   def index
     @is_app_user = xiaonei_session.invoke_method("xiaonei.users.isAppAdded")
     logger.debug("------xiaonei.users.isAppAdded --- #{@is_app_user.inspect}")

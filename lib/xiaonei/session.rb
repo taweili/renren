@@ -30,6 +30,7 @@ module Xiaonei
         :method => method,
         :api_key => api_key,
         :session_key => session_key,
+        :call_id => Time.now.to_i,
         :v => "1.0" }
       xn_params.merge!(params) if params
       Parse.new.process(Service.new.post(xn_params).body)

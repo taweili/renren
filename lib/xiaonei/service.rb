@@ -5,7 +5,7 @@ module Xiaonei
     DEBUG = false
     
     def post(params)
-      pp "### Posting Params: #{params.inspect}"
+      pp "### Posting Params: #{params.inspect}" if DEBUG
       Net::HTTP.post_form(url, params)
     end
     
