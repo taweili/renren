@@ -1,7 +1,12 @@
 class HomeController < ApplicationController
   acts_as_xiaonei_controller
+  # before_filter :print_xiaonei_session
   
-  def info
+  def print_xiaonei_session
+    logger.debug("### xiaonei_session = #{xiaonei_session.inspect}")
+  end
+  
+  def get_info
     @user = xiaonei_session.invoke_method("xiaonei.users.getInfo", :uids => "243357028", :fields => "uid,name,birthday,headurl")
     @user = @user.first
     logger.debug("------xiaonei.users.getInfo --- #{@user.inspect}")
@@ -9,6 +14,9 @@ class HomeController < ApplicationController
   end
   
   def index
+  end
+  
+  def test_all
     @is_app_user = xiaonei_session.invoke_method("xiaonei.users.isAppAdded")
     logger.debug("------xiaonei.users.isAppAdded --- #{@is_app_user.inspect}")
     
@@ -62,6 +70,8 @@ class HomeController < ApplicationController
     test_method("xiaonei.feed.publishTemplatizedAction", :template_id => 1, :body_data => {}.to_json, :title_data => {}.to_json)
     
     test_method("xiaonei.notifications.send", :to_ids => "<%=xiaonei_session.user%>", :notification => "<xn:name uid='243357028'/> is testing <a href='http://www.hainei.com'>Notification</a>")
+    
+    render :action => :index
   end
   
   def test
