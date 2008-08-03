@@ -12,6 +12,7 @@ class HomeController < ApplicationController
   
   def index
     @friend_ids = test_method("xiaonei.friends.get")
+    @friend_ids = @friend_ids[0..23]
   end
   
   def test_all

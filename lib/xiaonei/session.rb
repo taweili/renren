@@ -33,7 +33,11 @@ module Xiaonei
         :call_id => Time.now.to_i,
         :v => "1.0" }
       xn_params.merge!(params) if params
-      Parse.new.process(Service.new.post(xn_params).body)
+      begin 
+        Parse.new.process(Service.new.post(xn_params).body)
+      rescue Exception => exp
+        Xiaonei::Error.new
+      end
     end
 
   end
