@@ -53,6 +53,7 @@ module Xiaonei
       def array_elements
         { 
           "friends_getAppUsers_response" => UidArray,
+          "friends_get_response" => UidArray,
           "requests_sendRequest_response" => UidArray,
           "feed_publishTemplatizedAction_response" => TotalArray,
           "profile_setXNML_response" => TotalArray,

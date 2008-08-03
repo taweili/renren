@@ -7,9 +7,6 @@ class HomeController < ApplicationController
   end
   
   def get_info
-    @user = xiaonei_session.invoke_method("xiaonei.users.getInfo", :uids => "243357028", :fields => "uid,name,birthday,headurl")
-    @user = @user.first
-    logger.debug("------xiaonei.users.getInfo --- #{@user.inspect}")
     render :action => :index
   end
   
@@ -76,7 +73,8 @@ class HomeController < ApplicationController
   
   def test
     # test_method("xiaonei.requests.poke", :uid => "246353875")
-    test_method("xiaonei.blog.gets", :uid => xiaonei_session.user)
+    test_method("xiaonei.friends.get")
+    render :action => :index
   end
   
   protected
