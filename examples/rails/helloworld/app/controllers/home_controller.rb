@@ -11,6 +11,7 @@ class HomeController < ApplicationController
   end
   
   def index
+    @friend_ids = test_method("xiaonei.friends.get")
   end
   
   def test_all
@@ -82,5 +83,6 @@ class HomeController < ApplicationController
   def test_method(method, params = { })
     ret = xiaonei_session.invoke_method(method, params)
     logger.debug("------#{method} --- #{ret.inspect}")
+    ret
   end
 end
