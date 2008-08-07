@@ -24,6 +24,10 @@ module Xiaonei
     def api_key
       ENV['XIAONEI_API_KEY']
     end
+
+    def canvas_path
+      ENV['XIAONEI_RELATIVE_URL_ROOT']
+    end
     
     def invoke_method(method, params = {})
       xn_params = { 

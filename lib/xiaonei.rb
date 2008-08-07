@@ -22,5 +22,36 @@ require 'xiaonei/models/wall_posts'
 require 'xiaonei/models/wall_post'
 require 'xiaonei/models/comment'
 require 'xiaonei/models/key'
+
 module Xiaonei
+
+  class << self 
+    def canvas_path
+      ENV['XIAONEI_RELATIVE_URL_ROOT'] 
+    end
+    
+    def canvas_server_base
+      ActionController::Base.asset_host
+    end
+    
+    def xiaonei_path_prefix
+      "/" + canvas_path
+    end
+    
+    def path_prefix
+      @path_prefix
+    end
+    
+    def request_for_canvas(is_canvas_request)
+      original_path_prefix = @path_prefix 
+      begin
+        @path_prefix = xiaonei_path_prefix if is_canvas_request
+        yield
+      ensure
+        @path_prefix = original_path_prefix
+      end
+    end
+    
+  end
+  
 end

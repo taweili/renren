@@ -1,0 +1,16 @@
+  <ul>
+    <li>products_path: </li>
+    <li><%= products_path -%> </li>
+    <li><%= products_path(:canvas => false) -%></li>
+    <li><%= products_path(:only_path => false) -%></li>
+    <li><%= products_path(:canvas => false, :only_path => false) -%></li>
+  </ul>
+  <br/>
+  <ul>
+    <li>{:controller => :home, :action => :index}</li>
+    <li><%= url_for(:controller => :home, :action => :index) -%></li>
+    <li><%= url_for(:controller => :home, :action => :index, :canvas => false) -%></li>
+    <li><%= url_for(:controller => :home, :action => :index, :only_path => false) -%></li>
+    <li><%= url_for(:controller => :home, :action => :index, :canvas => false, :only_path => false) -%></li>
+  </ul>
+
