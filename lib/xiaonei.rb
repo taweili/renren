@@ -31,7 +31,7 @@ module Xiaonei
     end
     
     def canvas_server_base
-      ActionController::Base.asset_host
+      "apps.xiaonei.com"
     end
     
     def xiaonei_path_prefix
