@@ -1,5 +1,10 @@
 <h1><%= url_for(:controller => :home, :action => :index, :only_path => false) -%></h1>
 
+<% form_tag(url_for(:controller => :home, :action => :url, :canvas => false)) do -%>
+  <%= text_field_tag :foo -%>
+  <%= submit_tag "提交" -%>
+<% end -%>
+
   <ul>
     <li>{:controller => :home, :action => :index}</li>
     <li><%= url_for(:controller => :home, :action => :index) -%></li>
