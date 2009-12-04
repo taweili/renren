@@ -1,3 +1,5 @@
+require 'digest/md5'
+
 module Xiaonei
   class Session
     attr_accessor :auth_token
@@ -8,7 +10,7 @@ module Xiaonei
     attr_reader :api_key
     attr_reader :in_iframe
     attr_reader :added
-    
+
     def initialize(params)
       if params["xn_sig_session_key"]
         @expires = params["xn_sig_expires"] == "1"
@@ -20,24 +22,33 @@ module Xiaonei
         @added = params["xn_sig_added"] == "1"
       end
     end
-    
+
     def api_key
       ENV['XIAONEI_API_KEY']
+    end
+
+    def secret_key
+      ENV['XIAONEI_SECRET_KEY']
     end
 
     def canvas_path
       ENV['XIAONEI_RELATIVE_URL_ROOT']
     end
-    
+
+    def compute_sig(params)
+      str = params.collect {|k,v| "#{k}=#{v}"}.sort.join("") + secret_key
+      str = Digest::MD5.hexdigest(str)
+    end
+
     def invoke_method(method, params = {})
-      xn_params = { 
+      xn_params = {
         :method => method,
         :api_key => api_key,
         :session_key => session_key,
         :call_id => Time.now.to_i,
         :v => "1.0" }
       xn_params.merge!(params) if params
-      begin 
+      begin
         Parse.new.process(Service.new.post(xn_params).body)
       rescue Exception => exp
         Xiaonei::Error.new
