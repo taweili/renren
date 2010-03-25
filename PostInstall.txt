@@ -1,5 +1,5 @@
 
-For more information on xiaonei, see http://xiaonei.rubyforge.org
+For more information on renren, see http://renren.rubyforge.org
 
 NOTE: Change this information in PostInstall.txt 
 You can also delete it if you don't want it.

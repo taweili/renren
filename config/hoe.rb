@@ -1,10 +1,10 @@
-require 'xiaonei/version'
+require 'renren/version'
 
 AUTHOR = 'FIXME full name'  # can also be an array of Authors
 EMAIL = "FIXME email"
 DESCRIPTION = "description of gem"
-GEM_NAME = 'xiaonei' # what ppl will type to install your gem
-RUBYFORGE_PROJECT = 'xiaonei' # The unix name for your project
+GEM_NAME = 'renren' # what ppl will type to install your gem
+RUBYFORGE_PROJECT = 'renren' # The unix name for your project
 HOMEPATH = "http://#{RUBYFORGE_PROJECT}.rubyforge.org"
 DOWNLOAD_PATH = "http://rubyforge.org/projects/#{RUBYFORGE_PROJECT}"
 EXTRA_DEPENDENCIES = [
@@ -34,8 +34,8 @@ end
 REV = nil
 # UNCOMMENT IF REQUIRED:
 # REV = YAML.load(`svn info`)['Revision']
-VERS = Xiaonei::VERSION::STRING + (REV ? ".#{REV}" : "")
-RDOC_OPTS = ['--quiet', '--title', 'xiaonei documentation',
+VERS = Renren::VERSION::STRING + (REV ? ".#{REV}" : "")
+RDOC_OPTS = ['--quiet', '--title', 'renren documentation',
     "--opname", "index.html",
     "--line-numbers",
     "--main", "README",

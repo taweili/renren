@@ -6,8 +6,8 @@ README.txt
 Rakefile
 config/hoe.rb
 config/requirements.rb
-lib/xiaonei.rb
-lib/xiaonei/version.rb
+lib/renren.rb
+lib/renren/version.rb
 script/console
 script/destroy
 script/generate
@@ -15,7 +15,7 @@ script/txt2html
 setup.rb
 spec/spec.opts
 spec/spec_helper.rb
-spec/xiaonei_spec.rb
+spec/renren_spec.rb
 tasks/deployment.rake
 tasks/environment.rake
 tasks/rspec.rake
