@@ -7,6 +7,22 @@ This is the client library for renren.com API. Renren is the leading social netw
 <code>script/generate renren</code> will generate renren.yml under config/ directory.
 <code>script/generate xd_receiver</code> will generate xd_receiver.html under public/ directory.
 
+## Usage
+
+1. generate renren.yml and xd_receiver.html, complete the configuration in renren.yml
+
+2. add renren login button on view file, like this:
+
+<pre><code><%= xn_login_button "window.location.reload();", :autologoutlink => 'true' %></code></pre>
+
+3. include renren javscript before body end element, not before body start element ( for some bugs in renren javascript )
+
+<pre><code>
+<%= xn_connect_javascript_tag %>
+<%= init_xn_connect %>
+</code></pre>
+
+
 ## LICENSE:
 
 (The MIT License)

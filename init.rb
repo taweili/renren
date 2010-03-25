@@ -1,7 +1,9 @@
-xiaonei_config = "#{RAILS_ROOT}/config/xiaonei.yml"
+xiaonei_config = "#{RAILS_ROOT}/config/renren.yml"
 
 require 'xiaonei'
 require "xiaonei/rails/controller"
+require "xiaonei/rails/helpers"
+require "xiaonei/rails/extensions/action_controller"
 require "xiaonei/rails/xiaonei_url_rewrite"
 require "xiaonei/session"
 
