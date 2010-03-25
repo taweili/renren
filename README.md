@@ -4,6 +4,7 @@ This is the client library for renren.com API. Renren is the leading social netw
 
 ## Generators
 
+<code>script/generate renren</code> will generate renren.yml under config/ directory.
 <code>script/generate xd_receiver</code> will generate xd_receiver.html under public/ directory.
 
 ## LICENSE:
