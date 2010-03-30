@@ -11,18 +11,43 @@ module Renren
     attr_reader :in_iframe
     attr_reader :added
 
-    def initialize(params)
-      if params["xn_sig_session_key"]
-        @expires = params["xn_sig_expires"] == "1"
-        @session_key = params["xn_sig_session_key"]
-        @user = params["xn_sig_user"]
-        @time = params["xn_sig_time"]
-        @api_key = params["xn_sig_api_key"]
-        @in_iframe = params["xn_sig_in_iframe"] == "1"
-        @added = params["xn_sig_added"] == "1"
+    def initialize(options)
+      initialize_by_canvas(options) || initialize_by_connect(options)
+    end
+    
+    def initialize_by_canvas(options)
+      if options["xn_sig_session_key"]
+        @expires = options["xn_sig_expires"] == "1"
+        @session_key = options["xn_sig_session_key"]
+        @user = options["xn_sig_user"]
+        @time = options["xn_sig_time"]
+        @api_key = options["xn_sig_api_key"]
+        @in_iframe = options["xn_sig_in_iframe"] == "1"
+        @added = options["xn_sig_added"] == "1"
       end
     end
+    
+    def initialize_by_connect(options)
+      if options['session_key']
+        @expires = options['expires'] ? Integer(options['expires']) : 0
+        @session_key = options['session_key']
+        @user = options["user"] ? Integer(options["user"]) : invoke_method('xiaonei.users.getLoggerInUser', :session_key => session_key)
+        @secret_from_session = options["ss"]
+      end
+    end
+    
+    def infinite?
+      @expires == 0
+    end
 
+    def expired?
+      @expires.nil? || (!infinite? && Time.at(@expires) <= Time.now)
+    end
+
+    def secured?
+      !@session_key.nil? && !expired?
+    end
+    
     def compute_sig(params)
       str = params.collect {|k,v| "#{k}=#{v}"}.sort.join("") + Renren.secret_key
       str = Digest::MD5.hexdigest(str)
