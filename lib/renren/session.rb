@@ -2,6 +2,8 @@ require 'digest/md5'
 
 module Renren
   class Session
+    class IncorrectSignature < Exception; end
+  
     attr_accessor :auth_token
     attr_reader :session_key
     attr_reader :expires

@@ -25,6 +25,8 @@ require 'renren/models/wall_post'
 require 'renren/models/comment'
 require 'renren/models/key'
 
+require "renren/session"
+
 module Renren
   @renren_configuration = {}
 

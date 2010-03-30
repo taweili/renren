@@ -26,6 +26,17 @@ describe Renren::Session do
       sig.should eql(@xn_sig)
     end
   end
+  
+  describe "compute the signature from cookie" do
+    before :each do
+      @cookie_params = {
+        'session_key' => '3.57591bb29491cbb7542a02613cfd8685.3600.1269928800-239839315',
+        'expires' => '1269928800',
+        'user' => '239839315',
+        'ss' => '382d6bf798c78e759cae48a1e279dbcb'
+      }
+    end
+  end
 
 end
 

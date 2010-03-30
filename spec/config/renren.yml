@@ -1,8 +1,8 @@
 test:
   api_key: 296e8e42ff854545a1ac6fc1002666bf
   secret_key: 4c82528bffea402ba4750c2c35b1c083
-  canvas_page_name: renren test
-  callback_url: http://localhost:3000
+  canvas_page_name: rubytest
+  callback_url: http://renren-test.heroku.com
   tunnel:
     public_host_username: 
     public_host: 

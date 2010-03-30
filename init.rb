@@ -5,7 +5,6 @@ require "renren/rails/controller"
 require "renren/rails/helpers"
 require "renren/rails/extensions/action_controller"
 require "renren/rails/renren_url_rewrite"
-require "renren/session"
 
 Renren.load_configuration(renren_config)
 
