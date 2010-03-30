@@ -1,6 +1,8 @@
 $:.unshift(File.dirname(__FILE__)) unless
   $:.include?(File.dirname(__FILE__)) || $:.include?(File.expand_path(File.dirname(__FILE__)))
 
+require 'yaml'
+require 'action_controller'
 require 'renren/model'
 require 'renren/models/error'
 require 'renren/models/user'
@@ -29,9 +31,9 @@ module Renren
   class << self 
     def load_configuration(renren_yaml_file)
       return false unless File.exist?(renren_yaml_file)
-      YAML.load_file(renren_yaml_file)[RAILS_ENV] 
+      config = YAML.load_file(renren_yaml_file)[RAILS_ENV] 
       @renren_configuration = config
-      ActionController::Base.asset_host = XIAONEI['callback_url']
+      ActionController::Base.asset_host = config['callback_url']
     end
 
     def renren_config

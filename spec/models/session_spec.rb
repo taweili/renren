@@ -2,13 +2,13 @@
 require File.dirname(__FILE__) + '/../spec_helper.rb'
 require "renren/session"
 
-ENV['RENREN_API_KEY'] = 'ec9e57913c5b42b282ab7b743559e1b0'
-ENV['RENREN_SECRET_KEY'] = '7fbf9791036749cb82e74efd62e9eb38'
-
 describe Renren::Session do
 
   describe "compute the signature" do
     before(:each) do
+      Renren.renren_config['api_key'] = 'ec9e57913c5b42b282ab7b743559e1b0'
+      Renren.renren_config['secret_key'] = '7fbf9791036749cb82e74efd62e9eb38'
+      
       @xn_params = {
         'v' => '1.0',
         'api_key' => 'ec9e57913c5b42b282ab7b743559e1b0',

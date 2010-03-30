@@ -23,27 +23,15 @@ module Renren
       end
     end
 
-    def api_key
-      ENV['RENREN_API_KEY']
-    end
-
-    def secret_key
-      ENV['RENREN_SECRET_KEY']
-    end
-
-    def canvas_path
-      ENV['RENREN_RELATIVE_URL_ROOT']
-    end
-
     def compute_sig(params)
-      str = params.collect {|k,v| "#{k}=#{v}"}.sort.join("") + secret_key
+      str = params.collect {|k,v| "#{k}=#{v}"}.sort.join("") + Renren.secret_key
       str = Digest::MD5.hexdigest(str)
     end
 
     def invoke_method(method, params = {})
       xn_params = {
         :method => method,
-        :api_key => api_key,
+        :api_key => Renren.api_key,
         :session_key => session_key,
         :call_id => Time.now.to_i,
         :v => "1.0" }
