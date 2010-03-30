@@ -24,14 +24,30 @@ require 'renren/models/comment'
 require 'renren/models/key'
 
 module Renren
+  @renren_configuration = {}
 
   class << self 
-    def canvas_path
-      ENV['RENREN_RELATIVE_URL_ROOT'] 
+    def load_configuration(renren_yaml_file)
+      return false unless File.exist?(renren_yaml_file)
+      YAML.load_file(renren_yaml_file)[RAILS_ENV] 
+      @renren_configuration = config
+      ActionController::Base.asset_host = XIAONEI['callback_url']
+    end
+
+    def renren_config
+      @renren_configuration
     end
     
     def canvas_server_base
       "apps.renren.com"
+    end
+    
+    def api_server_base
+      "api.renren.com"
+    end
+
+    def api_rest_path
+      "/restserver.do"
     end
     
     def renren_path_prefix
@@ -40,6 +56,18 @@ module Renren
     
     def path_prefix
       @path_prefix
+    end
+
+    def canvas_path
+      @renren_configuration['canvas_page_name']
+    end
+
+    def api_key
+      @renren_configuration['api_key']
+    end
+
+    def secret_key
+      @renren_configuration['secret_key']
     end
     
     def request_for_canvas(is_canvas_request)

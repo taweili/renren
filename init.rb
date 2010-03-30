@@ -7,15 +7,9 @@ require "renren/rails/extensions/action_controller"
 require "renren/rails/renren_url_rewrite"
 require "renren/session"
 
-if File.exist?(renren_config)
-  RENREN = YAML.load_file(renren_config)[RAILS_ENV] 
-  ENV['RENREN_API_KEY'] = RENREN['api_key']
-  ENV['RENREN_SECRET_KEY'] = RENREN['secret_key']
-  ENV['RENREN_RELATIVE_URL_ROOT'] = RENREN['canvas_page_name']
-  ActionController::Base.asset_host = RENREN['callback_url']
-end
+Renren.load_configuration(renren_config)
 
-ActionController::Base.send(:include,Renren::Rails::Controller) 
+ActionController::Base.send(:include, Renren::Rails::Controller) 
 
 class ActionController::Routing::Route
   def recognition_conditions_with_renren
@@ -30,7 +24,7 @@ end
 # If this fails, it means we're on rails 1.2, we can ignore it
 begin
   ActionController::Base::optimise_named_routes = false 
-rescue NoMethodError=>e
+rescue NoMethodError => e
   nil
 end
 
