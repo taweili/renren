@@ -7,8 +7,7 @@ module Renren
         end
         
         def init_xn_connect
-          # TODO: use Renren.api_key instead
-          javascript_tag "XN_RequireFeatures(['EXNML'], function(){ XN.Main.init('#{ENV['RENREN_API_KEY']}', 'xd_receiver.html'); });"
+          javascript_tag "XN_RequireFeatures(['EXNML'], function(){ XN.Main.init('#{Renren.api_key}', 'xd_receiver.html'); });"
         end
         
         def xn_login_button(*args)
