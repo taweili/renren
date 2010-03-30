@@ -10,11 +10,7 @@ module Renren
           javascript_tag "XN_RequireFeatures(['EXNML'], function(){ XN.Main.init('#{Renren.api_key}', 'xd_receiver.html'); });"
         end
         
-        def xn_login_button(*args)
-          callback = args.first
-          options = args[1] || {}
-          options.merge!(:onlogin => callback) if callback
-
+        def xn_login_button(options)
           content_tag("xn:login-button", nil, options)
         end
       end
