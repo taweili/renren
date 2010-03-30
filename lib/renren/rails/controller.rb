@@ -3,11 +3,7 @@ require 'digest/md5'
 
 module Renren
   module Rails
-    module Controller
-      def self.included(controller)
-        controller.extend(ClassMethods) 
-      end
-      
+    module Controller      
       attr_reader :renren_session 
       
       def set_renren_session
@@ -100,12 +96,6 @@ module Renren
         # end
         raise Renren::Session::SignatureTooOld if renren_sig_params['time'] && Time.at(renren_sig_params['time'].to_f) < earliest_valid_session
         true
-      end
-      
-      module ClassMethods
-        def acts_as_renren_controller
-          before_filter :set_renren_session
-        end
       end
     end
   end
