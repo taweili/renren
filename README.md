@@ -2,23 +2,32 @@
 
 This is the client library for renren.com API. Renren is the leading social network in China.
 
-## Generators
+## Features:
 
-<code>script/generate renren</code> will generate renren.yml under config/ directory.
-<code>script/generate xd_receiver</code> will generate xd_receiver.html under public/ directory.
+Making writing Renren application as easy as writting web app
 
-## Usage
-
-1 generate renren.yml and xd_receiver.html, complete the configuration in renren.yml
-
-2 add renren login button on view file, like this:
-<pre><code><%= xn_login_button "window.location.reload();", :autologoutlink => 'true' %></code></pre>
-
-3 include renren javscript before body end element, not before body start element ( for some bugs in renren javascript )
+## Synopsis:
 <pre><code>
-<%= xn_connect_javascript_tag %>
-<%= init_xn_connect %>
+class HomeController < ApplicationController
+  before_filter :set_renren_session
+  
+  def index
+    @user = renren_session.invoke_method("renren.users.getInfo", :uids => "229615263", :fields => Renren::User.attr_names.join(","))
+    @user = @user.first
+    @friends = renren_session.invoke_method("renren.friends.getFriends")
+  end
+end
 </code></pre>
+
+## Install:
+
+install as a plugin
+<pre><code>script/plugin install git://github.com/taweili/renren.git</code></pre>
+
+## Usage:
+
+see [wikis](http://wiki.github.com/taweili/renren/)
+
 
 
 ## LICENSE:
