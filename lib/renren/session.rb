@@ -33,7 +33,7 @@ module Renren
       if options['session_key']
         @expires = options['expires'] ? Integer(options['expires']) : 0
         @session_key = options['session_key']
-        @user = options["user"] ? Integer(options["user"]) : invoke_method('xiaonei.users.getLoggerInUser', :session_key => session_key)
+        @user = invoke_method("xiaonei.users.getInfo", :uids => options["user"], :fields => Renren::User.attr_names.join(",")).first
         @secret_from_session = options["ss"]
       end
     end
