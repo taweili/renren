@@ -3,7 +3,7 @@ module Renren
     module Helpers
       module XnConnect
         def xn_connect_javascript_tag
-          "<script type='text/javascript' src='http://static.connect.renren.com/js/v1.0/FeatureLoader.jsp'></script>"
+          javascript_include_tag "http://static.connect.renren.com/js/v1.0/FeatureLoader.jsp"
         end
         
         def init_xn_connect
