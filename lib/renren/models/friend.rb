@@ -10,8 +10,7 @@ module Renren
        :id,
        :name,
        :headurl,
-       :network_id, 
-       :network_name
+       :tinyurl
       ]
     end
 
