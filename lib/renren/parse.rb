@@ -144,10 +144,11 @@ module Renren
       listener = MyListener.new
       pp("  parse --- #{data}") if DEBUG
       REXML::Document.parse_stream(data, listener)
+      result = listener.result
+      if Renren::Error === result
+        raise result.to_session_error
+      end
       listener.result
-    rescue Exception => e
-      pp e
-      nil
     end
   end
 end

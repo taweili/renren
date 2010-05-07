@@ -22,5 +22,12 @@ module Renren
     def msg
       @error_msg
     end
+    
+    def to_session_error
+      case code
+      when "450" then Renren::Session::SessionExpired.new(msg)
+      else Renren::Session::OtherException.new(msg) 
+      end
+    end
   end
 end
