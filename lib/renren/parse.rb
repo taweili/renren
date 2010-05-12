@@ -28,6 +28,7 @@ module Renren
       def model_classes
         [ 
          Renren::Error, 
+         Renren::Admin,
          Renren::User,
          Renren::HometownLocation,
          Renren::WorkInfo,

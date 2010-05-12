@@ -53,8 +53,7 @@ module Renren
     end
 
     def secured?
-      #TODO: ignore expire as renren expires always expired
-      !@session_key.nil?# && !expired?
+      !@session_key.nil? && !expired?
     end
     
     def compute_sig(params)

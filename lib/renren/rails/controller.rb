@@ -31,7 +31,7 @@ module Renren
         #returning gracefully if the cookies aren't set or have expired
         return unless parsed['session_key'] && parsed['user'] && parsed['expires'] && parsed['ss'] 
         # TODO: check expires, why it alway less than Time.now
-        # return unless (Time.at(parsed['expires'].to_s.to_f) > Time.now) || (parsed['expires'] == "0")
+        return unless (Time.at(parsed['expires'].to_s.to_f) > Time.now) || (parsed['expires'] == "0")
         #if we have the unexpired cookies, we'll throw an exception if the sig doesn't verify
         verify_signature(parsed, cookies[Renren.api_key], true)
 
