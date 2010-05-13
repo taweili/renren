@@ -69,6 +69,7 @@ module Renren
         :call_id => Time.now.to_i,
         :v => "1.0" }
       xn_params.merge!(params) if params
+      xn_params.merge!(:sig => compute_sig(xn_params))
       Parse.new.process(Service.new.post(xn_params).body)
     end
 
